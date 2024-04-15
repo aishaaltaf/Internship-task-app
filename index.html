@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-do Task Application</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<style>
+
+
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("top-view-desk-with-keyboard-notebook.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+
+
+  .main-container {
+    background-color: rgba(0, 0, 0, 0.4); /* Black with 50% opacity */ 
+    height: 500px;
+    width: 700px;
+    margin-left: 400px;
+    margin-top: 100px;
+    border: 2px solid black;
+
+   
+  }
+
+  .menu {
+    margin-left: 130px;
+    width: 60%;
+    height: 40px;
+  }
+
+  .menu button {
+    margin-top: 50px;
+    margin-left: 20px; /* Adjust margin for buttons */
+    background-color: #000000; /* Black */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .menu button:hover {
+    /* border: 2px solid #ff8c00;Underline text on hover */
+    border-bottom: 4px solid #ff8c00;
+
+}
+
+  
+
+  .addTask,
+  .deletedTask,
+  .taskList {
+    display: none;
+    margin-left: 120px; /* Adjust margin for task containers */
+    margin-top: 90px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 17px;
+  }
+
+</style>
+</head>
+<body>
+
+
+
+
+<div class="main-container">
+  <div class="menu">
+    <button onclick="showAddTask()">Add Task</button>
+    <button onclick="showDeletedTask()">Deleted Task</button>
+    <button onclick="showTaskList()">Task List</button>
+  </div>
+
+  <div class="addTask" >
+    <h2>Add Task</h2><br>
+    <form class="taskForm" id="taskForm">
+      <label for="taskTitle">Task Title:</label><br>
+      <input type="text" id="taskTitle" name="taskTitle"><br><br>
+      <label for="taskDescription">Task Description:</label><br>
+      <textarea id="taskDescription" name="taskDescription"></textarea><br><br>
+     <button type="submit" class="btn btn-success">Add task</button>
+    </form>
+  </div>
+
+  <div class="deletedTask" >
+    <h2>Deleted Task</h2> 
+    <p>No Task</p>
+  </div>
+
+  <div class="taskList">
+    <h2>Task List</h2>
+    <ul id="taskUl"></ul>
+  </div>
+</div>
+
+
+
+
+<script>
+  document.getElementById("taskForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    addTask();
+  });
+
+  function addTask() {
+    var title = document.getElementById("taskTitle").value;
+    var description = document.getElementById("taskDescription").value;
+
+    var taskItem = document.createElement("li");
+    taskItem.innerHTML = "<strong>" + title + "</strong><br>" + description;
+
+    document.getElementById("taskUl").appendChild(taskItem);
+
+    // Clear input fields after adding task
+    document.getElementById("taskTitle").value = "";
+    document.getElementById("taskDescription").value = "";
+  }
+
+  function showAddTask() {
+    hideAll();
+    document.querySelector(".addTask").style.display = "block";
+  }
+
+  function showDeletedTask() {
+    hideAll();
+    document.querySelector(".deletedTask").style.display = "block";
+  }
+
+  function showTaskList() {
+    hideAll();
+    document.querySelector(".taskList").style.display = "block";
+  }
+
+  function hideAll() {
+    document.querySelector(".addTask").style.display = "none";
+    document.querySelector(".deletedTask").style.display = "none";
+    document.querySelector(".taskList").style.display = "none";
+  }
+</script>
+</body>
+</html>
+
+
